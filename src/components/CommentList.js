@@ -1,13 +1,21 @@
 import React from "react";
 import Comment from "./Comment";
 
-const CommentList = ({ comments }) => {
-  return comments.map((commentItem, index) => (
-    <div key={index}>
-        <Comment  data={commentItem} />
-        <div className="pl-10 border-l border-black">
-            <CommentList comments={commentItem.replies} />
+const CommentList = ({ comment }) => {
+  return comment.map((commentItem, index) => (
+    <div key={commentItem.id}>
+      <Comment
+        data={
+          commentItem.kind === "youtube#comment"
+            ? commentItem?.snippet
+            : commentItem.snippet?.topLevelComment?.snippet
+        }
+      />
+      {commentItem.replies && (
+        <div className="pl-10 border-black">
+          <CommentList comment={commentItem.replies.comments} />
         </div>
+      )}
     </div>
   ));
 };

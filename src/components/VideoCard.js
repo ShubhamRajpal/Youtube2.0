@@ -12,7 +12,7 @@ const VideoCard = ({ info }) => {
     <div className="p-2 w-[360] mt-2">
       <img
         className="rounded-2xl w-full"
-        src={thumbnails.medium.url}
+        src={thumbnails?.medium?.url}
         alt="thumbnail"
       />
       <div className="flex flex-col">
