@@ -2,7 +2,6 @@ import React from "react";
 import { formatViewCount } from "../utils/helper";
 
 const VideoCard = ({ info }) => {
-  console.log(info);
   const { snippet, statistics = null } = info;
   const { thumbnails, channelTitle, title } = snippet;
 
