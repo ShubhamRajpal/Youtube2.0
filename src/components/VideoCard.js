@@ -1,4 +1,3 @@
-import React from "react";
 import { formatViewCount } from "../utils/helper";
 
 const VideoCard = ({ info }) => {
@@ -10,7 +9,7 @@ const VideoCard = ({ info }) => {
   return (
     <div className="p-2 w-[360] mt-2">
       <img
-        className="rounded-2xl w-full"
+        className="rounded-2xl w-full object-cover"
         src={thumbnails?.medium?.url}
         alt="thumbnail"
       />

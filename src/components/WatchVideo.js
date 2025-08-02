@@ -8,6 +8,7 @@ import useVideoDetails from "../hooks/useVideoDetails";
 import Video from "./Video";
 import useChannelDetails from "../hooks/useChannelDetails";
 import RelatedVideos from "./RelatedVideos";
+import { LiaCommentsSolid } from "react-icons/lia";
 
 const WatchVideo = () => {
   const dispatch = useDispatch();
@@ -26,10 +27,18 @@ const WatchVideo = () => {
     <div className="flex justify-center gap-4">
       <div className="flex flex-col w-[820px]">
         <Video data={videoDetails} channelInfo={channelDetails} />
-        <CommentsContainer videoId={searchparams.get("v")} />
+        {videoDetails?.snippet?.liveBroadcastContent === "none" ? (
+          <CommentsContainer videoId={searchparams.get("v")} />
+        ) : (
+          <div className="flex bg-gray-100 gap-2 my-4 py-4 px-2 items-center rounded-lg">
+            <LiaCommentsSolid />
+            Join the conversation to interact with the creator and others
+            watching this live stream.
+          </div>
+        )}
       </div>
       <div className="w-[400px]">
-        <LiveChat />
+        {videoDetails?.snippet?.liveBroadcastContent === "live" && <LiveChat />}
         <RelatedVideos data={videoDetails} />
       </div>
     </div>

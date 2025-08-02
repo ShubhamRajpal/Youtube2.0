@@ -8,3 +8,4 @@
 * Added LiveChat Feature with API Polling + custom Comment option
 * Added Related Videos section on Watch page 
 * Added Channel banner Section for each video on watch page
+* Implemented Infinite Scroll for Main Page

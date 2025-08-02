@@ -6,7 +6,6 @@ import { useSearchParams } from "react-router-dom";
 const Video = ({ data, channelInfo }) => {
   const [searchparams] = useSearchParams();
 
-
   return (
     <div className="flex flex-col w-full">
       <div className="">
@@ -67,23 +66,25 @@ const Video = ({ data, channelInfo }) => {
         </div>
       </div>
       {/* Video Description */}
-      <div className="bg-gray-100 rounded-lg py-2 px-4">
-        <div>
+      <div className="bg-gray-100 rounded-lg py-2 px-4 flex flex-col gap-2">
+        <div className="">
           <span className="text-black font-bold">
             {data?.statistics?.viewCount} views
           </span>
         </div>
-        
-          {data?.snippet?.localized?.description && (
-            <div className="text-sm  gap-2">
-              {data?.snippet?.localized?.description
-                .split("\n")
-                .map((desc, index) => (
-                  <p key={index}>{desc}</p>
-                ))}
-            </div>
-          )}
-        </div>
+
+        {data?.snippet?.localized?.description && (
+          <div className="text-sm flex flex-col gap-2">
+            {data?.snippet?.localized?.description
+              .split("\n")
+              .map((desc, index) => (
+                <p className="text-black" key={index}>
+                  {desc}
+                </p>
+              ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

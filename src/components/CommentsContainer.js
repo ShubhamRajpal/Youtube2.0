@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import CommentList from "./CommentList";
 import { COMMENTSTHREADS_API } from "../utils/constants";
+import { LiaCommentsSolid } from "react-icons/lia";
 
 const CommentsContainer = ({ videoId }) => {
-  const [commentsList, setCommentsList] = useState(null);
+  const [commentsList, setCommentsList] = useState([]);
 
   useEffect(() => {
     getComments();

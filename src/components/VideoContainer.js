@@ -1,30 +1,43 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { YOUTUBE_VIDEOS_API } from "../utils/constants";
-import VideoCard from "./VideoCard";
-import { Link } from "react-router-dom";
+import ShowVideo from "./ShowVideo";
+import Shimmer from "./Shimmer";
+import { getPageToken } from "../utils/videoSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const VideoContainer = () => {
-  const [videos, setVideos] = useState(null);
+  const [videos, setVideos] = useState([]);
+  const [nextPageToken, setNextPageToken] = useState("");
+  const dispatch = useDispatch();
+  const pageToken = useSelector((store) => store.video.pageToken);
+  let API_URL = YOUTUBE_VIDEOS_API;
 
   useEffect(() => {
     getVideos();
-  }, []);
+  }, [nextPageToken]);
 
   const getVideos = async () => {
-    const response = await fetch(YOUTUBE_VIDEOS_API);
+    if (nextPageToken) {
+      API_URL += `&pageToken=${nextPageToken}`;
+    }
+    const response = await fetch(API_URL);
     const data = await response.json();
-    setVideos(data.items);
+    console.log(data);
+    dispatch(getPageToken(data.nextPageToken));
+
+
+    setVideos((videos) => [...videos, ...data.items]);
   };
 
-  return (
-    <div className="flex flex-wrap gap-1">
-      {videos &&
-        videos.map((video) => (
-          <Link key={video.id} to={"/watch?v=" + video.id}>
-            <VideoCard  info={video} />
-          </Link>
-        ))}
-    </div>
+  return videos.length === 0 ? (
+    <Shimmer />
+  ) : (
+    <ShowVideo
+      videos={videos}
+      setNextPageToken={(s) =>
+        setNextPageToken(nextPageToken !== pageToken ? pageToken : "")
+      }
+    />
   );
 };
 

@@ -24,7 +24,7 @@ const LiveChat = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center mb-2">
       <div className="p-2 mx-2 w-full h-[460px] border border-gray-200 overflow-y-scroll flex flex-col-reverse">
         {message.map((msg, index) => (
           <ChatMessage key={index} name={msg.name} text={msg.text} />
@@ -44,7 +44,7 @@ const LiveChat = () => {
         }}>
         <input
           type="text"
-          className="border border-gray-400 w-[280px] p-1 rounded-sm"
+          className="border border-gray-400 w-[310px] p-1 rounded-sm"
           placeholder="Enter Message"
           value={liveMessage}
           onChange={(e) => setLiveMessage(e.target.value)}
