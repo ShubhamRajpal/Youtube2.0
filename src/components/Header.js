@@ -76,8 +76,8 @@ const Header = () => {
   };
 
   return (
-    <div className="grid grid-flow-col p-4">
-      <div className="flex col-span-1">
+    <div className="fixed grid grid-flow-col px-4 py-2 h-15 z-30 w-full bg-white">
+      <div className="flex col-span-1 items-center">
         <img
           className="h-6 cursor-pointer px-3"
           src="https://img.icons8.com/?size=100&id=36389&format=png&color=000000"
@@ -93,7 +93,7 @@ const Header = () => {
         </Link>
       </div>
       <div className="col-span-10">
-        <div className="flex justify-center">
+        <div className="flex justify-center items-center">
           <input
             type="text"
             placeholder="Search"

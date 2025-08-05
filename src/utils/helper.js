@@ -1,3 +1,13 @@
+import { GiClothesline } from "react-icons/gi";
+import { HiOutlineSignal } from "react-icons/hi2";
+import { IoMusicalNotesOutline, IoNewspaperOutline } from "react-icons/io5";
+import { MdCastForEducation, MdPets } from "react-icons/md";
+import { PiFilmSlate, PiMusicNote } from "react-icons/pi";
+import { RiSignalTowerLine } from "react-icons/ri";
+import { SiYoutubegaming } from "react-icons/si";
+import { TbBulb } from "react-icons/tb";
+import { TfiCup } from "react-icons/tfi";
+
 var nameList = [
   "Time",
   "Past",
@@ -180,23 +190,102 @@ export function generateRandomNames() {
 }
 
 export function generateRandomMessage(length) {
-    var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
+  var result = "";
+  var characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
 }
 
 export const formatViewCount = (num) => {
   if (num >= 10000000) {
-    return (num / 10000000).toFixed(1) + ' Cr';
+    return (num / 10000000).toFixed(1) + " Cr";
   } else if (num >= 100000) {
-    return (num / 100000).toFixed(1) + ' Lakhs';
+    return (num / 100000).toFixed(1) + " Lakhs";
   } else if (num >= 1000) {
-    return (num / 1000).toFixed(1) + 'K';
+    return (num / 1000).toFixed(1) + "K";
   } else {
     return num.toString();
   }
 };
+
+// 1 - Film & Animation
+// 2 - Autos & Vehicles
+// 10 - Music
+// 15 - Pets & Animals
+// 17 - Sports
+// 18 - Short Movies
+// 19 - Travel & Events
+// 20 - Gaming
+// 21 - Videoblogging
+// 22 - People & Blogs
+// 23 - Comedy
+// 24 - Entertainment
+// 25 - News & Politics
+// 26 - Howto & Style
+// 27 - Education
+// 28 - Science & Technology
+// 29 - Nonprofits & Activism
+// 30 - Movies
+// 31 - Anime/Animation
+// 32 - Action/Adventure
+// 33 - Classics
+// 34 - Comedy
+// 35 - Documentary
+// 36 - Drama
+// 37 - Family
+// 38 - Foreign
+// 39 - Horror
+// 40 - Sci-Fi/Fantasy
+// 41 - Thriller
+// 42 - Shorts
+// 43 - Shows
+// 44 - Trailers
+
+export const explore = [
+  {
+    id: 10,
+    title: "Music",
+    url: "/?v=10",
+    icon: <IoMusicalNotesOutline size={20}/>
+  },
+  {
+    id: 17,
+    title: "Sports",
+    url: "/?v=17",
+    icon : <TfiCup size={20}/>
+  },
+  {
+    id: 22,
+    title: "Blogs",
+    url: "/?v=22",
+    icon : <RiSignalTowerLine size={20}/>
+  },
+  {
+    id: 28,
+    title: "Technology",
+    url: "/?v=28",
+    icon : <TbBulb size={20}/>
+  },
+  {
+    id: 25,
+    title: "News",
+    url: "/?v=25",
+    icon: <IoNewspaperOutline size={20}/>
+  },
+  {
+    id: 26,
+    title: "Fashion & beauty",
+    url: "/?v=26",
+    icon: <GiClothesline size={20}/>
+  },
+  {
+    id: 15,
+    title: "Pets & Animals",
+    url: "/?v=15",
+    icon: <MdPets size={20}/>
+  },
+];

@@ -5,18 +5,20 @@ const list = [
   "All",
   "Music",
   "Chess",
+  "Science",
   "Comedy",
   "Cricket",
   "Mixes",
   "Data Structures",
-  "Recently watched",
   "Trending",
   "Jukebox",
+  "Live",
+   "Recently watched",
 ];
 
 const ButtonList = () => {
   return (
-    <div className="flex">
+    <div className="flex gap-2 ml-3">
       {list.map((item, index) => (
         <Button key={index} name={item} />
       ))}

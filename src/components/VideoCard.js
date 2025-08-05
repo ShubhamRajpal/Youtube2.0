@@ -1,13 +1,15 @@
+import { useSelector } from "react-redux";
 import { formatViewCount } from "../utils/helper";
 
 const VideoCard = ({ info }) => {
   const { snippet, statistics = null } = info;
   const { thumbnails, channelTitle, title } = snippet;
+  const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
 
   const viewCount = statistics && formatViewCount(statistics.viewCount);
 
   return (
-    <div className="p-2 w-[360] mt-2">
+    <div className={`p-2 mt-2 ${isMenuOpen ? "w-[357]" : "w-[430]"} `}>
       <img
         className="rounded-2xl w-full object-cover"
         src={thumbnails?.medium?.url}

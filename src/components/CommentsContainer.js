@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CommentList from "./CommentList";
 import { COMMENTSTHREADS_API } from "../utils/constants";
-import { LiaCommentsSolid } from "react-icons/lia";
+import CommentsShimmer from "./CommentsShimmer";
 
 const CommentsContainer = ({ videoId }) => {
   const [commentsList, setCommentsList] = useState([]);
@@ -13,11 +13,14 @@ const CommentsContainer = ({ videoId }) => {
   const getComments = async () => {
     const data = await fetch(COMMENTSTHREADS_API + "&videoId=" + videoId);
     const response = await data.json();
+    console.log(response);
     setCommentsList(response.items);
   };
 
-  return (
-    <div className="my-14">
+  return commentsList?.length === 0 ? (
+    <CommentsShimmer />
+  ) : (
+    <div className="my-8">
       <h1 className="font-bold text-2xl mb-8">
         {commentsList?.length} Comments
       </h1>

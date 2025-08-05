@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BiDislike, BiLike } from "react-icons/bi";
 import { HiDownload } from "react-icons/hi";
 import { PiShareFatLight } from "react-icons/pi";
@@ -5,6 +6,11 @@ import { useSearchParams } from "react-router-dom";
 
 const Video = ({ data, channelInfo }) => {
   const [searchparams] = useSearchParams();
+  const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
+
+  const handleDesriptionButton = () => {
+    setIsDescriptionOpen(!isDescriptionOpen);
+  };
 
   return (
     <div className="flex flex-col w-full">
@@ -26,7 +32,7 @@ const Video = ({ data, channelInfo }) => {
         <span>
           <h1 className="text-xl line font-bold">{data?.snippet?.title}</h1>
         </span>
-        <div className="flex gap-4 items-center my-2">
+        <div className="flex gap-3 items-center my-2">
           <div className="flex gap-4 items-center">
             <img
               className="h-10 rounded-full"
@@ -66,7 +72,7 @@ const Video = ({ data, channelInfo }) => {
         </div>
       </div>
       {/* Video Description */}
-      <div className="bg-gray-100 rounded-lg py-2 px-4 flex flex-col gap-2">
+      <div className="bg-gray-100 rounded-lg py-2 px-4 flex flex-col gap-2 ">
         <div className="">
           <span className="text-black font-bold">
             {data?.statistics?.viewCount} views
@@ -74,7 +80,10 @@ const Video = ({ data, channelInfo }) => {
         </div>
 
         {data?.snippet?.localized?.description && (
-          <div className="text-sm flex flex-col gap-2">
+          <div
+            className={`text-sm gap-2 ${
+              !isDescriptionOpen ? "line-clamp-2" : "flex flex-col"
+            }`}>
             {data?.snippet?.localized?.description
               .split("\n")
               .map((desc, index) => (
@@ -84,6 +93,11 @@ const Video = ({ data, channelInfo }) => {
               ))}
           </div>
         )}
+        <div
+          className=" text-blue-500 cursor-pointer"
+          onClick={handleDesriptionButton}>
+          {isDescriptionOpen ? "Show Less" : "Show More..."}
+        </div>
       </div>
     </div>
   );

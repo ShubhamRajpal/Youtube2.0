@@ -4,7 +4,7 @@ import appStore from "./utils/appStore";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import WatchVideo from "./components/WatchVideo";
 import MainContainer from "./components/MainContainer";
-import SearchResuts from "./components/SearchResuts";
+import SearchResults from "./components/SearchResults";
 
 const App = () => {
   const appRouter = createBrowserRouter([
@@ -22,7 +22,7 @@ const App = () => {
         },
         {
           path: "/results",
-          element: <SearchResuts />,
+          element: <SearchResults />,
         },
       ],
     },

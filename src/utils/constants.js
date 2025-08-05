@@ -13,3 +13,5 @@ export const COMMENTSTHREADS_API =
   process.env.REACT_APP_YOUTUBEAPI_KEY;
 
 export const CHANNELS_API_URL = `https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&key=${process.env.REACT_APP_YOUTUBEAPI_KEY}&id=`;
+
+export const YOUTUBE_VIDEOS_CATEGORY = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&key=${process.env.REACT_APP_YOUTUBEAPI_KEY}`;

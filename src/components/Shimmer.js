@@ -3,7 +3,7 @@ import ShimmerCard from './ShimmerCard'
 
 const Shimmer = () => {
   return (
-    <div className='flex flex-wrap gap-1'>
+    <div className='flex flex-wrap gap-1 w-full'>
         <ShimmerCard />
         <ShimmerCard />
         <ShimmerCard />

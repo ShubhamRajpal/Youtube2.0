@@ -5,7 +5,7 @@ const RelatedVideoCard = ({ data }) => {
         src={data?.snippet?.thumbnails?.medium?.url}
         className=" h-24 rounded-lg"
       />
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-1">
         <p className="text-sm font-semibold tracking-wide line-clamp-2 text-black">
           {data?.snippet?.title}...
         </p>

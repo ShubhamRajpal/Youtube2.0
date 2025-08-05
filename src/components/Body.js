@@ -3,11 +3,10 @@ import { Outlet } from "react-router-dom";
 import Header from "./Header";
 
 const Body = () => {
-
   return (
     <div className="flex flex-col">
       <Header />
-      <div className="grid grid-flow-col">
+      <div className="grid grid-flow-col mt-2 pt-[56px]">
         <Sidebar />
         <Outlet />
       </div>

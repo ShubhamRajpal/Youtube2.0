@@ -1,16 +1,18 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import VideoCard from "./VideoCard";
+import { useSelector } from "react-redux";
 
 const ShowVideo = ({ videos, setNextPageToken }) => {
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (param) => {
-        console.log(param);
         if (param[0].isIntersecting) {
           observer.unobserve(lastVideo);
           setNextPageToken();
         }
+        console.log(param);
       },
       { threshold: 0.5 }
     );
@@ -23,7 +25,7 @@ const ShowVideo = ({ videos, setNextPageToken }) => {
   }, [videos]);
 
   return (
-    <div className="flex flex-wrap gap-1">
+    <div className={`flex flex-wrap justify-start gap-1 w-full`}>
       {videos &&
         videos.map((video, index) => (
           <Link className="show-video" key={index} to={"/watch?v=" + video.id}>
