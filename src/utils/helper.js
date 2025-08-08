@@ -1,12 +1,13 @@
+import moment from "moment";
+import { useContext } from "react";
 import { GiClothesline } from "react-icons/gi";
-import { HiOutlineSignal } from "react-icons/hi2";
 import { IoMusicalNotesOutline, IoNewspaperOutline } from "react-icons/io5";
-import { MdCastForEducation, MdPets } from "react-icons/md";
-import { PiFilmSlate, PiMusicNote } from "react-icons/pi";
+import { MdPets } from "react-icons/md";
 import { RiSignalTowerLine } from "react-icons/ri";
-import { SiYoutubegaming } from "react-icons/si";
 import { TbBulb } from "react-icons/tb";
 import { TfiCup } from "react-icons/tfi";
+import { themeContext } from "../contexts/context";
+const { dark } = useContext(themeContext);
 
 var nameList = [
   "Time",
@@ -200,15 +201,15 @@ export function generateRandomMessage(length) {
   return result;
 }
 
+export const publishedDate = (publishedAt) =>
+  moment(publishedAt).startOf("hour").fromNow();
+
 export const formatViewCount = (num) => {
-  if (num >= 10000000) {
-    return (num / 10000000).toFixed(1) + " Cr";
-  } else if (num >= 100000) {
-    return (num / 100000).toFixed(1) + " Lakhs";
-  } else if (num >= 1000) {
-    return (num / 1000).toFixed(1) + "K";
-  } else {
-    return num.toString();
+  if (num > 999999) return (num / 1000000).toFixed(1) + "M";
+  else if (num > 99999 || num > 9999 || num > 999)
+    return (num / 1000).toFixed(1) + "k";
+  else {
+    return num;
   }
 };
 
@@ -245,47 +246,62 @@ export const formatViewCount = (num) => {
 // 43 - Shows
 // 44 - Trailers
 
+export const btnList = [
+  "All",
+  "Music",
+  "Chess",
+  "Science",
+  "Comedy",
+  "Cricket",
+  "Mixes",
+  "Data Structures",
+  "Trending videos",
+  "Jukebox",
+  "Live",
+  "Neetcode",
+];
+
 export const explore = [
   {
     id: 10,
     title: "Music",
     url: "/?v=10",
-    icon: <IoMusicalNotesOutline size={20}/>
+    icon: <IoMusicalNotesOutline size={20} />,
   },
   {
     id: 17,
     title: "Sports",
     url: "/?v=17",
-    icon : <TfiCup size={20}/>
+    icon: <TfiCup size={20} />,
   },
   {
     id: 22,
     title: "Blogs",
     url: "/?v=22",
-    icon : <RiSignalTowerLine size={20}/>
+    icon: <RiSignalTowerLine size={20} className={`${dark && "text-white"}`}/>,
   },
   {
     id: 28,
     title: "Technology",
     url: "/?v=28",
-    icon : <TbBulb size={20}/>
+    icon: <TbBulb size={20} />,
   },
   {
     id: 25,
     title: "News",
     url: "/?v=25",
-    icon: <IoNewspaperOutline size={20}/>
+    icon: <IoNewspaperOutline size={20} />,
   },
   {
     id: 26,
     title: "Fashion & beauty",
     url: "/?v=26",
-    icon: <GiClothesline size={20}/>
+    icon: <GiClothesline size={20} />,
   },
   {
     id: 15,
     title: "Pets & Animals",
     url: "/?v=15",
-    icon: <MdPets size={20}/>
+    icon: <MdPets size={20} />,
   },
 ];

@@ -1,4 +1,8 @@
+import useRelatedVideos from "../hooks/useRelatedVideos";
+import { publishedDate } from "../utils/helper";
 const RelatedVideoCard = ({ data }) => {
+
+  
   return (
     <div className="flex gap-2">
       <img
@@ -11,8 +15,7 @@ const RelatedVideoCard = ({ data }) => {
         </p>
         <p className="text-xs text-gray-500 tracking-wide">{data?.snippet?.channelTitle}</p>
         <div className="flex text-xs text-gray-500 gap-1">
-          <p>23k views •</p>
-          <p> 23 hours ago</p>
+          <p>{publishedDate(data?.snippet?.publishedAt)}</p>
         </div>
       </div>
     </div>

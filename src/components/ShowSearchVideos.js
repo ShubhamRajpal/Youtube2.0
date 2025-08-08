@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import VideoCard from "./VideoCard";
 import { useSelector } from "react-redux";
+import ButtonList from "./ButtonList";
 
 const ShowSearchVideos = ({ videos, setNextPageToken }) => {
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
+  console.log(videos);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -13,7 +15,6 @@ const ShowSearchVideos = ({ videos, setNextPageToken }) => {
           observer.unobserve(lastVideo);
           setNextPageToken();
         }
-        console.log(param);
       },
       { threshold: 0.5 }
     );
@@ -28,16 +29,18 @@ const ShowSearchVideos = ({ videos, setNextPageToken }) => {
   return (
     <div
       className={`flex flex-wrap ${
-        isMenuOpen ? "ml-[255px] basis-[85%]" : "ml-4 basis-[100%]"
+        isMenuOpen ? "ml-[258px] basis-[85%]" : "ml-6 basis-[100%]"
       }`}>
-      {videos?.map((video, index) => (
-        <Link
-         className="showSearch-video"
-          key={index}
-          to={"/watch?v=" + video.id.videoId}>
-          <VideoCard info={video} />
-        </Link>
-      ))}
+      <ButtonList />
+      {videos &&
+        videos?.map((video, index) => (
+          <Link
+            className="showSearch-video"
+            key={index}
+            to={"/watch?v=" + video.id.videoId}>
+            <VideoCard info={video} />
+          </Link>
+        ))}
     </div>
   );
 };

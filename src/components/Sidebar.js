@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 const hutIcon = new URL("../Assets/hut.png", import.meta.url).href;
@@ -15,46 +15,50 @@ const youtubeStudioIcon = new URL("../Assets/ythex.png", import.meta.url).href;
 const youtubeKidsIcon = new URL("../Assets/ytkids.png", import.meta.url).href;
 const youtubeMusicIcon = new URL("../Assets/ytround.png", import.meta.url).href;
 import { explore } from "../utils/helper";
+import { themeContext } from "../contexts/context";
+import Home from "../Assets/Home";
+import Shorts from "../Assets/Shorts";
+import Subscriptions from "../Assets/Subscriptions";
 
 const Sidebar = () => {
+  const { dark } = useContext(themeContext);
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
   const location = useLocation();
-  const currentPath = location.pathname;
   if (!isMenuOpen) return null;
 
   return (
-    <div className="flex flex-col fixed z-30 bg-white gap-4 pl-7 col-span-4 h-[calc(100vh-55px)] overflow-y-scroll min-w-52">
-      <ul className="flex flex-col w-full gap-3">
-        <li className="flex gap-4 items-center">
-          <img src={hutIcon} alt="home-menu" className=" h-5" />
+    <div
+      className={`flex flex-col side-bar fixed z-30  gap-4 pl-5 col-span-4 h-[calc(100vh-50px)] overflow-hidden min-w-52 ${
+        dark ? "bg-[#0F0F0F]" : "bg-white"
+      }`}>
+      <ul className="flex flex-col w-full gap-2 pt-4">
+        <li
+          className={`flex items-center rounded-lg py-1 px-2 ${
+            dark ? "hover:bg-[#ffffff1a] text-white" : "hover:bg-gray-100 D"
+          }`}>
+          <Home />
           <Link to="/">Home</Link>
         </li>
-        <Link to="/?v=42">
-          <li className="flex gap-4 items-center">
-            <img alt="home" src={shortsIcon} className="h-5" />
-            Shorts
-          </li>
-        </Link>
-        <li className="flex gap-4 items-center">
-          <img
-            alt="subscriptions"
-            className="h-5"
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAb1BMVEX///8AAAClpaVhYWErKyt0dHSEhITc3Nzl5eX19fW0tLSUlJTLy8uioqKAgIDr6+u4uLhNTU0jIyPz8/MyMjKLi4sMDAybm5scHBzExMRSUlJbW1tubm52dnY7OztGRkYWFhZHR0cwMDA/Pz/W1tYwXPK3AAAER0lEQVR4nO2d6XbaMBBGZVYDDgQISxIgbcn7P2N7UuNFTr1Jo/nc893fOqpuIYwlzYyNIYQQQgghhBBCCCGEEFGe1rOQrJ+CG75HYXkPbjgObDimIQ1pSEMaDtDwspuEZHcJbkgIIYQQQgjxzj5GZO/R8BB4M9iOg0fDlbbMt6xoSEMaqkNDGhb5/+PhZo7IxqMhIYQQQgghRIj5aH2dDoXrejTvprdYvWhv/jrzslq0Fxxpr7Yno7YfYOh0J3+8t/sYb9rrdODWRvBNe5VOvDULYh6rtafxAC7WXqEzcYPhVHuBzlzrBRfFsR/jofBRXHb97+kyH+jzRFmews/HsnZg/iUNX6PixlPLr2n2sHYPtDB/3B9Lf6kddnwM83knEIbsbuVYOyz7qNs+4uGQP0zXDqMhMDRMoSEwNEyhITA0TKEhMDRMoWEnFsvVqeN1ggMKhsnXRBef+eZ1hDd8nEv+SJynakV4w0s218x5rjaENyxcf0xC/DUGN1xMogIBTu6UDaM38WRQbcMoenadsQF9Q+m4AWAYnV9dJ60DwVA2bmAYSsYNEMMoOrlO/C9gDMXihqLh4V5WbLjg64ui4XOl5EYkbiga/vnIknNZUSJu6BqaxaWsGK1d56+gbGjMs6W48x031A3Nxu4l6Tlu6BsWkwn+svUaNxAMTWzHSJ9xA8LQmJmlOO6Q9doAiKFg3EAxlIsbMIZicQPI0OztJF0vcQPJUCZuYBmauf+4AWYoEDfgDE2yKyu63m/gGVbjhts5FaBhNW44nVNBGpqNx7iBaWjMyVLs3xAZ1dDMf5UVez/EwRpW4kbfqAFsaMWNvpsNZMNlaUfVNyziGtrljn3/QVjD17Jf/1IdVMO1Jdh/P4xpOLcLqh2uwiEN7WrOrct9BqBh/NMSdEtJwTNclvWim+NxDZyhXRLvfMUPZphYfmf39D4sQ/sI4+Lh6BvJ0N5O+EmXAjK0t4SerqBgDDcfZT9vaYsohnaMuHu7CsYw9Hy8VgLCUCBG5CAY2jFi6u961CAYftr7CM+pUeqGQjEiR9kwlooRObqGcjEiRzNzrxIjRFpSKBpePV+j/QOcDFof+4jvgDEUK7sAMRQsncEwlCx/QjCUiBE5AIbCbYv0DaVLSbUN5V92q2woXZpnlKtk5csrjYZhfm8WprldeMN92vvt1tSM0hMKHQfir+9psNZ2Kn0xPkfLcG+7YeePFBoCQ8MUGgJDwxQaAkPDFBoCQ8OUbNTQWrIX6+Fqh2Udy8N0IPNJdode37E8O1ypb92OSHaJXv8mlvxwZWht5/PuIvWJ1IVaq+mQXkYbF9480nByGRU4TobCsbjshv8MO+dleDT9Rm60F+hM4x/XUN9I9qDFo8qw3xY0bRas5pgPiZYFmsP9tWn9JPZ6bp4MkE7JnMut9nI7s+2a67hJTofZUDickiE9gRFCCCGEEEIIIYQQQiD5DRf/VsChuDfgAAAAAElFTkSuQmCC"
-          />
+        <li className="flex items-center justify-start hover:bg-gray-100 rounded-lg py-1 px-2">
+          <Shorts />
+          Shorts
+        </li>
+        <li className="flex items-center hover:bg-gray-100 rounded-lg py-1 px-2">
+          <Subscriptions />
           Subscriptions
         </li>
       </ul>
-      <span className="w-52 bg-gray-100 block py-[1px] rounded-full"></span>
-      <ul className="flex flex-col w-full gap-3">
-        <li className="flex gap-4 items-center">
+      <span className="w-52 bg-gray-200 block py-[0.5px] rounded-full"></span>
+      <ul className="flex flex-col w-full gap-2">
+        <li className="flex gap-4 items-center hover:bg-gray-100 rounded-lg py-1 px-2">
           <img alt="home" src={historyIcon} className="h-5" />
           History
         </li>
-        <li className="flex gap-4 items-center">
+        <li className="flex gap-4 items-center hover:bg-gray-100 rounded-lg py-1 px-2">
           <img alt="home" src={playlistIcon} className="h-5" />
           Playlists
         </li>
-        <li className="flex gap-4 items-center">
+        <li className="flex gap-4 items-center hover:bg-gray-100 rounded-lg py-1 px-2">
           <img
             alt="home"
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9Cv3kluzzwRdkTKs6dfGx5pakHA2Y020qGg&usqp=CAU"
@@ -62,62 +66,62 @@ const Sidebar = () => {
           />
           Your Videos
         </li>
-        <li className="flex gap-4 items-center">
+        <li className="flex gap-4 items-center hover:bg-gray-100 rounded-lg py-1 px-2">
           <img alt="home" src={watchIcon} className="h-5" />
           Watch Later
         </li>
-        <li className="flex gap-4 items-center">
+        <li className="flex gap-4 items-center hover:bg-gray-100 rounded-lg py-1 px-2">
           <img alt="home" src={likeIcon} className="h-5" />
           Liked Videos
         </li>
       </ul>
-      <span className="w-52 bg-gray-100 block py-[1px] rounded-full"></span>
+      <span className="w-52 bg-gray-200 block py-[0.5px] rounded-full"></span>
       <h1 className="font-bold">Explore</h1>
-      <ul className="flex flex-col w-full gap-3">
+      <ul className="flex flex-col w-full gap-2">
         {explore.map((explore, index) => (
           <Link to={explore.url} key={explore.title}>
-            <li className="flex gap-4 items-center">
+            <li className="flex gap-4 items-center hover:bg-gray-100 rounded-lg py-1 px-2">
               {explore.icon}
               {explore.title}
             </li>
           </Link>
         ))}
       </ul>
-      <span className="w-52 bg-gray-100 block py-[1px] rounded-full"></span>
+      <span className="w-52 bg-gray-200 block py-[0.5px] rounded-full"></span>
       <h1 className="font-bold">More from Youtube</h1>
-      <ul className="flex flex-col w-full gap-3">
-        <li className="flex gap-4 items-center">
+      <ul className="flex flex-col w-full gap-2">
+        <li className="flex gap-4 items-center hover:bg-gray-100 rounded-lg py-1 px-2">
           <img alt="home" src={youtubePremiumIcon} className="h-5" />
           Youtube Premium
         </li>
-        <li className="flex gap-4 items-center">
+        <li className="flex gap-4 items-center hover:bg-gray-100 rounded-lg py-1 px-2">
           <img alt="home" src={youtubeStudioIcon} className="h-5" />
           Youtube Studio
         </li>
-        <li className="flex gap-4 items-center">
+        <li className="flex gap-4 items-center hover:bg-gray-100 rounded-lg py-1 px-2">
           <img alt="home" src={youtubeMusicIcon} className="h-5" />
           Youtube Music
         </li>
-        <li className="flex gap-4 items-center">
+        <li className="flex gap-4 items-center hover:bg-gray-100 rounded-lg py-1 px-2">
           <img alt="home" src={youtubeKidsIcon} className="h-5" />
           Youtube Kids
         </li>
       </ul>
-      <span className="w-52 bg-gray-100 block py-[1px] rounded-full"></span>
-      <ul className="flex flex-col w-full gap-3">
-        <li className="flex gap-4 items-center">
+      <span className="w-52 bg-gray-200 block py-[0.5px] rounded-full"></span>
+      <ul className="flex flex-col w-full gap-2">
+        <li className="flex gap-4 items-center hover:bg-gray-100 rounded-lg py-1 px-2">
           <img alt="home" src={settingsIcon} className="h-5" />
           Settings
         </li>
-        <li className="flex gap-4 items-center">
+        <li className="flex gap-4 items-center hover:bg-gray-100 rounded-lg py-1 px-2">
           <img alt="home" src={historyIcon} className="h-5" />
           Report History
         </li>
-        <li className="flex gap-4 items-center">
+        <li className="flex gap-4 items-center hover:bg-gray-100 rounded-lg py-1 px-2">
           <img alt="home" src={helpIcon} className="h-5" />
           Help
         </li>
-        <li className="flex gap-4 items-center">
+        <li className="flex gap-4 items-center hover:bg-gray-100 rounded-lg py-1 px-2">
           <img alt="home" src={sendIcon} className="h-5" />
           Send feedback
         </li>

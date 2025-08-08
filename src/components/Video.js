@@ -3,6 +3,8 @@ import { BiDislike, BiLike } from "react-icons/bi";
 import { HiDownload } from "react-icons/hi";
 import { PiShareFatLight } from "react-icons/pi";
 import { useSearchParams } from "react-router-dom";
+import { formatViewCount } from "../utils/helper";
+
 
 const Video = ({ data, channelInfo }) => {
   const [searchparams] = useSearchParams();
@@ -41,7 +43,7 @@ const Video = ({ data, channelInfo }) => {
             <div className="flex flex-col">
               <h2 className="font-semibold">{channelInfo?.snippet?.title}</h2>
               <p className="text-sm text-gray-500">
-                {channelInfo?.statistics?.subscriberCount / 1000000}M
+                {formatViewCount(channelInfo?.statistics?.subscriberCount)}
                 subscribers
               </p>
             </div>
@@ -53,7 +55,7 @@ const Video = ({ data, channelInfo }) => {
             <div className="flex items-start gap-4 bg-gray-100 font-bold py-2 px-4 rounded-full cursor-pointer">
               <span className="flex gap-1 text-md font-semibold">
                 <BiLike size={25} />
-                {data?.statistics?.likeCount}
+                {formatViewCount(data?.statistics?.likeCount)}
               </span>
               <span className="border-r-2 h-7 bg-slate-300"></span>
               <span>
@@ -75,7 +77,7 @@ const Video = ({ data, channelInfo }) => {
       <div className="bg-gray-100 rounded-lg py-2 px-4 flex flex-col gap-2 ">
         <div className="">
           <span className="text-black font-bold">
-            {data?.statistics?.viewCount} views
+            {formatViewCount(data?.statistics?.viewCount)} views
           </span>
         </div>
 

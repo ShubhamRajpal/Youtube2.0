@@ -4,7 +4,6 @@ import VideoCard from "./VideoCard";
 import { useSelector } from "react-redux";
 
 const ShowVideo = ({ videos, setNextPageToken }) => {
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       (param) => {
@@ -12,7 +11,6 @@ const ShowVideo = ({ videos, setNextPageToken }) => {
           observer.unobserve(lastVideo);
           setNextPageToken();
         }
-        console.log(param);
       },
       { threshold: 0.5 }
     );

@@ -5,7 +5,7 @@ import {
 } from "../utils/constants";
 import ShowVideo from "./ShowVideo";
 import Shimmer from "./Shimmer";
-import { getCategoryId, getPageToken } from "../utils/videoSlice";
+import { updateCategoryId, getPageToken } from "../utils/videoSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 
@@ -45,6 +45,7 @@ const VideoContainer = () => {
     }
 
     const data = await response.json();
+    console.log(data);
     dispatch(getPageToken(data.nextPageToken));
     setVideos(
       categoryId === videoCategory
@@ -53,7 +54,7 @@ const VideoContainer = () => {
     );
 
     if (categoryId !== videoCategory) {
-      dispatch(getCategoryId(videoCategory));
+      dispatch(updateCategoryId(videoCategory));
     }
   };
 

@@ -5,11 +5,19 @@ import { openMenu } from "../utils/appSlice";
 import Shimmer from "./Shimmer";
 import ShowSearchVideos from "./ShowSearchVideos";
 import { getPageToken } from "../utils/videoSlice";
+import { addKeywordSearch } from "../utils/searchSlice";
+import { useSearchParams } from "react-router-dom";
+
 
 const SearchResuts = () => {
+  
+  const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
   const [results, setResults] = useState([]);
   const Keyword = useSelector((store) => store.search.keyword);
 
+  const [urlSearchParam] = useSearchParams();
+  const searchQuery = urlSearchParam.get("q");
+  
   const dispatch = useDispatch();
   const YOUTUBEAPIKEY = process.env.REACT_APP_YOUTUBEAPI_KEY;
   const [nextPageToken, setNextPageToken] = useState("");
@@ -17,12 +25,12 @@ const SearchResuts = () => {
 
   useEffect(() => {
     dispatch(openMenu());
-    getSearchresults();
-  }, [Keyword, nextPageToken]);
+    getSearchresults(searchQuery);
+  }, [searchQuery, nextPageToken]);
 
-  const getSearchresults = async () => {
+  const getSearchresults = async (Query) => {
     let API_URL =
-      YOUTUBE_KEYWORD_SEARCH + Keyword + "&type=video&key=" + YOUTUBEAPIKEY;
+      YOUTUBE_KEYWORD_SEARCH + Query + "&type=video&key=" + YOUTUBEAPIKEY;
     if (nextPageToken) {
       API_URL += `&pageToken=${nextPageToken}`;
     }
@@ -30,11 +38,23 @@ const SearchResuts = () => {
     const data = await response.json();
     console.log(data);
     dispatch(getPageToken(data.nextPageToken));
-    setResults((results) => [...results, ...data.items]);
+
+    setResults(
+      Query === Keyword ? (videos) => [...videos, ...data.items] : data.items
+    );
+
+    if (Query !== Keyword) {
+      dispatch(addKeywordSearch(Query));
+    }
   };
 
   return results?.length === 0 ? (
-    <Shimmer />
+    <div
+      className={`col-span-8 px-4 ${
+        isMenuOpen ? "ml-[240px] basis-[85%]" : "ml-0 basis-[100%]"
+      }`}>
+      <Shimmer />
+    </div>
   ) : (
     <ShowSearchVideos
       videos={results}

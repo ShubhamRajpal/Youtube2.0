@@ -10,12 +10,13 @@ const videoSlice = createSlice({
     getPageToken: (state, action) => {
       state.pageToken = action.payload;
     },
-    getCategoryId: (state, action) => {
+    updateCategoryId: (state, action) => {
       state.categoryId = action.payload;
     },
+    
   },
 });
 
-export const { getPageToken,getCategoryId } = videoSlice.actions;
+export const { getPageToken, updateCategoryId } = videoSlice.actions;
 
 export default videoSlice.reducer;

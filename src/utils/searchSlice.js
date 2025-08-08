@@ -4,7 +4,7 @@ const searchSlice = createSlice({
   name: "search",
   initialState: {
     cacheItems: {},
-    keyword: null,
+    keyword: "",
   },
   reducers: {
     cacheResults: (state, action) => {
@@ -16,6 +16,6 @@ const searchSlice = createSlice({
   },
 });
 
-export const { cacheResults,addKeywordSearch } = searchSlice.actions;
+export const { cacheResults, addKeywordSearch } = searchSlice.actions;
 
 export default searchSlice.reducer;

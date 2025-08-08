@@ -17,6 +17,7 @@ const useRelatedVideos = (videoTitle) => {
     );
     const data = await response.json();
     setRelatedVideos(data.items);
+    console.log(data);
   };
 
   return relatedVideos;
