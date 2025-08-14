@@ -39,7 +39,7 @@ const App = () => {
   return (
     <themeContext.Provider value={{ dark : darkMode }}>
       <Provider store={appStore}>
-        <div className={`${darkMode && "bg-[#0F0F0F]]"}`}>
+        <div className={`${darkMode && "bg-[#0F0F0F]]"} absolute`}>
           <label className="switch fixed">
             <input type="checkbox" onChange={toggleModeHandler} />
             <span className="slider round"></span>

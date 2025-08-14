@@ -28,9 +28,9 @@ const ShowSearchVideos = ({ videos, setNextPageToken }) => {
 
   return (
     <div
-      className={`flex flex-wrap ${
-        isMenuOpen ? "ml-[258px] basis-[85%]" : "ml-6 basis-[100%]"
-      }`}>
+      className={`flex flex-wrap gap-4 sm:gap-2 ${
+        !isMenuOpen ? "w-screen" : "w-screen sm:w-[640px] md:w-[760px] xl:w-[1114px]"
+      } `}>
       <ButtonList />
       {videos &&
         videos?.map((video, index) => (

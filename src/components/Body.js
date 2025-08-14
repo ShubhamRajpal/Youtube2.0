@@ -9,10 +9,10 @@ const Body = () => {
   console.log(dark);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-screen items-center sm:items-start">
       <Header />
       <div
-        className={`grid grid-flow-col pt-[51px] mt-[1px] ${
+        className={`flex pt-[67px] sm:pt-[51px] mt-[1px] w-screen ${
           dark && "bg-[#0F0F0F]"
         }`}>
         <Sidebar />

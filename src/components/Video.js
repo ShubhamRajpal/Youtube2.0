@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { BiDislike, BiLike } from "react-icons/bi";
 import { HiDownload } from "react-icons/hi";
 import { PiShareFatLight } from "react-icons/pi";
 import { useSearchParams } from "react-router-dom";
-import { formatViewCount } from "../utils/helper";
-
+import { formatViewCount, publishedDate } from "../utils/helper";
+import { themeContext } from "../contexts/context";
 
 const Video = ({ data, channelInfo }) => {
   const [searchparams] = useSearchParams();
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
+  const { dark } = useContext(themeContext);
 
   const handleDesriptionButton = () => {
     setIsDescriptionOpen(!isDescriptionOpen);
@@ -16,11 +17,11 @@ const Video = ({ data, channelInfo }) => {
 
   return (
     <div className="flex flex-col w-full">
-      <div className="">
+      <div className="lg:pl-2">
         <iframe
           width="820"
           height="500"
-          className="rounded-xl"
+          className="lg:rounded-xl w-screen h-[300px] md:h-[550px] lg:w-[680px] lg:h-[500px] xl:w-[820px]"
           src={`https://www.youtube.com/embed/${searchparams.get(
             "v"
           )}?autoplay=1&mute=1`}
@@ -30,30 +31,42 @@ const Video = ({ data, channelInfo }) => {
           allowFullScreen></iframe>
       </div>
       {/* Channel Details */}
-      <div className="my-3">
+      <div className="my-3 pl-1 md:pl-2">
         <span>
-          <h1 className="text-xl line font-bold">{data?.snippet?.title}</h1>
+          <h1 className={`text-xl line font-bold px-2 sm:px-1 ${dark ? "text-white" : ""}`}>
+            {data?.snippet?.title}
+          </h1>
         </span>
-        <div className="flex gap-3 items-center my-2">
-          <div className="flex gap-4 items-center">
+        <div className="flex flex-col sm:flex-row gap-3 sm:items-center my-2">
+          <div className="flex gap-2 items-center">
             <img
               className="h-10 rounded-full"
               src={channelInfo?.snippet?.thumbnails?.default?.url}
             />
             <div className="flex flex-col">
-              <h2 className="font-semibold">{channelInfo?.snippet?.title}</h2>
+              <h2 className={`font-semibold ${dark ? "text-white" : ""}`}>
+                {channelInfo?.snippet?.title}
+              </h2>
               <p className="text-sm text-gray-500">
                 {formatViewCount(channelInfo?.statistics?.subscriberCount)}
                 subscribers
               </p>
             </div>
-            <button className="bg-black text-white font-bold py-2 px-4 rounded-full">
+            <button
+              className={`${
+                !dark ? "bg-black text-white" : "bg-white"
+              } font-bold py-2 px-4 rounded-full`}>
               Subscribe
             </button>
           </div>
-          <div className="flex gap-2 w-[60%] justify-end">
-            <div className="flex items-start gap-4 bg-gray-100 font-bold py-2 px-4 rounded-full cursor-pointer">
-              <span className="flex gap-1 text-md font-semibold">
+          <div className="flex gap-2 w-[60%] sm:justify-end">
+            <div
+              className={`flex items-start gap-4 ${
+                dark
+                  ? "bg-[#ffffff1a] text-white font-semibold"
+                  : "bg-gray-100 font-bold"
+              }   py-2 px-4 rounded-full cursor-pointer`}>
+              <span className={`flex gap-1 text-md font-semibold `}>
                 <BiLike size={25} />
                 {formatViewCount(data?.statistics?.likeCount)}
               </span>
@@ -62,11 +75,17 @@ const Video = ({ data, channelInfo }) => {
                 <BiDislike size={25} />
               </span>
             </div>
-            <div className="font-semibold bg-gray-100 rounded-full py-2 px-4 flex gap-1 items-center cursor-pointer">
+            <div
+              className={`font-semibold ${
+                dark ? "bg-[#ffffff1a] text-white" : "bg-gray-100 "
+              } rounded-full py-2 px-4 flex gap-1 items-center cursor-pointer`}>
               <PiShareFatLight size={25} />
               <span>Share</span>
             </div>
-            <div className="font-semibold bg-gray-100 rounded-full py-2 px-4 flex gap-1 items-center cursor-pointer">
+            <div
+              className={`font-semibold ${
+                dark ? "bg-[#ffffff1a] text-white" : "bg-gray-100 "
+              } rounded-full py-2 px-4 flex gap-1 items-center cursor-pointer`}>
               <HiDownload size={25} />
               <span>Download</span>
             </div>
@@ -74,10 +93,16 @@ const Video = ({ data, channelInfo }) => {
         </div>
       </div>
       {/* Video Description */}
-      <div className="bg-gray-100 rounded-lg py-2 px-4 flex flex-col gap-2 ">
-        <div className="">
-          <span className="text-black font-bold">
+      <div
+        className={`rounded-lg py-2 px-4 flex flex-col gap-2 ml-2 ${
+          dark ? "bg-[#ffffff1a] text-white font-semibold" : "bg-gray-100"
+        }`}>
+        <div className="flex gap-2">
+          <span className="font-bold">
             {formatViewCount(data?.statistics?.viewCount)} views
+          </span>
+          <span className="font-bold">
+            {publishedDate(data?.snippet?.publishedAt)}
           </span>
         </div>
 
@@ -89,9 +114,7 @@ const Video = ({ data, channelInfo }) => {
             {data?.snippet?.localized?.description
               .split("\n")
               .map((desc, index) => (
-                <p className="text-black" key={index}>
-                  {desc}
-                </p>
+                <p key={index}>{desc}</p>
               ))}
           </div>
         )}

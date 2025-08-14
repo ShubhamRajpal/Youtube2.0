@@ -4,6 +4,8 @@ import VideoCard from "./VideoCard";
 import { useSelector } from "react-redux";
 
 const ShowVideo = ({ videos, setNextPageToken }) => {
+  const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (param) => {
@@ -23,7 +25,10 @@ const ShowVideo = ({ videos, setNextPageToken }) => {
   }, [videos]);
 
   return (
-    <div className={`flex flex-wrap justify-start gap-1 w-full`}>
+    <div
+      className={`flex flex-wrap gap-4 sm:gap-2 ${
+        !isMenuOpen ? "w-screen" : "w-screen sm:w-[640px] md:w-[760px] xl:w-[1114px]"
+      } `}>
       {videos &&
         videos.map((video, index) => (
           <Link className="show-video" key={index} to={"/watch?v=" + video.id}>

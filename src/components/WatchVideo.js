@@ -24,8 +24,8 @@ const WatchVideo = () => {
   }, []);
 
   return (
-    <div className="flex justify-center gap-4">
-      <div className="flex flex-col w-[820px]">
+    <div className="flex flex-col lg:flex-row sm:justify-center gap-4 w-screen">
+      <div className="flex flex-col w-screen lg:w-[820px]">
         <Video data={videoDetails} channelInfo={channelDetails} />
         {videoDetails?.snippet?.liveBroadcastContent === "none" ? (
           <CommentsContainer videoId={searchparams.get("v")} />
@@ -37,7 +37,7 @@ const WatchVideo = () => {
           </div>
         )}
       </div>
-      <div className="w-[400px]">
+      <div className="w-[400px] sm:w-2/3">
         {videoDetails?.snippet?.liveBroadcastContent === "live" && <LiveChat />}
         <RelatedVideos data={videoDetails} />
       </div>

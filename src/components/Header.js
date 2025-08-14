@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { YOUTUBE_SEARCH_API } from "../utils/constants";
@@ -84,12 +84,12 @@ const Header = () => {
 
   return (
     <div
-      className={`fixed grid grid-flow-col px-4 py-2 h-15 z-30 w-full ${
+      className={`flex fixed justify-between px-0 py-4 sm:px-4 sm:py-2 h-15 z-30 w-screen ${
         dark ? "bg-[#0F0F0F]" : "bg-white"
       } `}>
-      <div className="flex col-span-1 items-center">
+      <div className="flex items-center w-[125px] sm:w-[135px]">
         <RxHamburgerMenu
-          className={`cursor-pointer mx-3 ${dark && "text-white"} `}
+          className={`cursor-pointer mx-1 sm:mx-3 ${dark && "text-white"} `}
           size={20}
           onClick={handleToggleSidebar}
         />
@@ -97,12 +97,12 @@ const Header = () => {
           <YoutubeLogo />
         </Link>
       </div>
-      <div className="col-span-6">
-        <div className="flex justify-center items-center">
+      <div className="w-[220px] sm:w-[250px] md:w-[450px] lg:w-[600px]">
+        <div className="flex justify-start sm:pl-2 sm:justify-center items-center">
           <input
             type="text"
             placeholder="Search"
-            className={`w-2/3 rounded-l-full pt-[6] pb-[4] px-3  ${
+            className={`w-1/2 sm:w-2/3 rounded-l-full pt-[6] pb-[4] px-3  ${
               dark
                 ? "bg-[#ffffff14] border border-zinc-700 text-white"
                 : "border-gray-300 border outline-blue-400"
@@ -131,14 +131,14 @@ const Header = () => {
           </button>
           <div
             className={`mx-4 p-2 rounded-full bg-gray-100 ${
-              dark && "bg-[#ffffff14] text-white"
-            }`}>
-            <FaMicrophone size={20} />
+              dark && "bg-[#ffffff14] text-white" 
+            } hidden sm:block md:block`}>
+            <FaMicrophone size={20} className={`${dark && "text-black"}`} />
           </div>
         </div>
         {searchQuery && showSuggestions && (
           <div
-            className={`absolute px-3 py-2 w-[32rem] mt-1 ml-16 rounded-xl  ${
+            className={`absolute px-3 py-2 w-[13.75rem] md:w-[22rem] lg:w-[28rem] mt-1 ml-2 lg:ml-7 rounded-xl  ${
               dark
                 ? "bg-[#0F0F0F] text-white outline-zinc-400"
                 : "bg-white shadow-lg border border-gray-100"
@@ -170,11 +170,11 @@ const Header = () => {
           </div>
         )}
       </div>
-      <div className="col-span-3 flex gap-5 justify-end items-center">
-        <MdOutlineVideoCall size={30} className={`${dark && "text-white"}`} />
+      <div className="flex ml-0 mr-1 sm:gap-2 md:gap-3 justify-end md:justify-end items-center">
+        <MdOutlineVideoCall size={30} className={`${dark && "text-white"} hidden sm:block md:block`} />
         <IoIosNotificationsOutline
           size={30}
-          className={`${dark && "text-white"}`}
+          className={`${dark && "text-white"} hidden sm:block md:block`}
         />
         <img className="h-9 rounded-full" src={self} alt="user-icon" />
       </div>

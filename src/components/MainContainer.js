@@ -8,8 +8,8 @@ const MainContainer = () => {
 
   return (
     <div
-      className={`col-span-8 px-4 ${
-        isMenuOpen ? "ml-[240px] basis-[85%]" : "ml-0 basis-[100%]"
+      className={`flex flex-col ${
+        isMenuOpen ? "md:pl-[200px] lg:pl-[242px]" : "items-start sm:pl-4"
       }`}>
       <ButtonList />
       <VideoContainer />

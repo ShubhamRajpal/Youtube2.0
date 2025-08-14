@@ -1,13 +1,10 @@
 import moment from "moment";
-import { useContext } from "react";
 import { GiClothesline } from "react-icons/gi";
 import { IoMusicalNotesOutline, IoNewspaperOutline } from "react-icons/io5";
 import { MdPets } from "react-icons/md";
 import { RiSignalTowerLine } from "react-icons/ri";
 import { TbBulb } from "react-icons/tb";
 import { TfiCup } from "react-icons/tfi";
-import { themeContext } from "../contexts/context";
-const { dark } = useContext(themeContext);
 
 var nameList = [
   "Time",
@@ -205,46 +202,13 @@ export const publishedDate = (publishedAt) =>
   moment(publishedAt).startOf("hour").fromNow();
 
 export const formatViewCount = (num) => {
-  if (num > 999999) return (num / 1000000).toFixed(1) + "M";
+  if (num > 999999) return (num / 1000000).toFixed(1) + "M ";
   else if (num > 99999 || num > 9999 || num > 999)
-    return (num / 1000).toFixed(1) + "k";
+    return (num / 1000).toFixed(1) + "k ";
   else {
     return num;
   }
 };
-
-// 1 - Film & Animation
-// 2 - Autos & Vehicles
-// 10 - Music
-// 15 - Pets & Animals
-// 17 - Sports
-// 18 - Short Movies
-// 19 - Travel & Events
-// 20 - Gaming
-// 21 - Videoblogging
-// 22 - People & Blogs
-// 23 - Comedy
-// 24 - Entertainment
-// 25 - News & Politics
-// 26 - Howto & Style
-// 27 - Education
-// 28 - Science & Technology
-// 29 - Nonprofits & Activism
-// 30 - Movies
-// 31 - Anime/Animation
-// 32 - Action/Adventure
-// 33 - Classics
-// 34 - Comedy
-// 35 - Documentary
-// 36 - Drama
-// 37 - Family
-// 38 - Foreign
-// 39 - Horror
-// 40 - Sci-Fi/Fantasy
-// 41 - Thriller
-// 42 - Shorts
-// 43 - Shows
-// 44 - Trailers
 
 export const btnList = [
   "All",
@@ -254,11 +218,11 @@ export const btnList = [
   "Comedy",
   "Cricket",
   "Mixes",
-  "Data Structures",
-  "Trending videos",
+  "Neetcode",
   "Jukebox",
   "Live",
-  "Neetcode",
+  "Data Structures",
+  "Trending videos",
 ];
 
 export const explore = [
@@ -278,7 +242,7 @@ export const explore = [
     id: 22,
     title: "Blogs",
     url: "/?v=22",
-    icon: <RiSignalTowerLine size={20} className={`${dark && "text-white"}`}/>,
+    icon: <RiSignalTowerLine size={20} />,
   },
   {
     id: 28,

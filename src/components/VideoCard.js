@@ -14,9 +14,9 @@ const VideoCard = ({ info }) => {
   const timeElapsed = publishedDate(publishedAt);
 
   return (
-    <div className={`p-2 mt-2 ${isMenuOpen ? "w-[357]" : "w-[430]"} `}>
+    <div className={`mt-2 w-screen ${isMenuOpen ? "md:w-[365]" : "md:w-[400] md:pr-4"} `}>
       <img
-        className="rounded-2xl w-full object-cover shadow-lg"
+        className="md:rounded-2xl w-full object-cover shadow-lg"
         src={thumbnails?.medium?.url}
         alt="thumbnail"
       />
@@ -41,12 +41,10 @@ const VideoCard = ({ info }) => {
           }`}>
           {channelTitle}
         </p>
-        <div>
+        <div className="ml-10">
           {statistics && (
             <span
-              className={`text-[#606060] text-sm ml-10  ${
-                dark && "text-[#aaaaaa]"
-              }`}>
+              className={`text-[#606060] text-sm ${dark && "text-[#aaaaaa]"}`}>
               {viewCount} views •{" "}
             </span>
           )}

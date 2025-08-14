@@ -4,7 +4,7 @@
 
 @layer components {
     ::-webkit-scrollbar {
-        width: 10px; 
+        width: 6px; 
     }
 
     ::-webkit-scrollbar-track {
@@ -26,13 +26,100 @@
     }
 
     .switch{
-        width: 40px;
-        height: 20px;
-        top: 1rem;
-        right: 11rem;
         z-index: 100;
     }
-    
+
+    @media screen and (min-width: 300px) and (max-width: 430px) {
+       .switch{
+            width: 40px;
+            height: 20px;
+            top: 1.5rem;
+            left: 20rem;
+        }
+
+        input:checked + .slider:before{
+            transform: translateX(18px);
+        }
+    }
+
+    @media screen and (min-width: 600px) and (max-width: 767px){
+       .switch{
+            width: 40px;
+            height: 20px;
+            top: 1rem;
+            left: 22rem;
+        }
+
+        input:checked + .slider:before{
+            transform: translateX(18px);
+        }
+    }
+
+    @media screen and (min-width: 768px) and (max-width: 900px) {
+       .switch{
+            width: 40px;
+            height: 20px;
+            top: 1rem;
+            left: 36rem;
+        }
+
+        input:checked + .slider:before{
+            transform: translateX(18px);
+        }
+    }
+
+    @media screen and (min-width: 901px) and (max-width: 999px) {
+       .switch{
+            width: 40px;
+            height: 20px;
+            top: 1rem;
+            left: 44rem;
+        }
+
+        input:checked + .slider:before{
+            transform: translateX(18px);
+        }
+    }
+
+    @media screen and (min-width: 1000px) and (max-width: 1200px) {
+       .switch{
+            width: 40px;
+            height: 20px;
+            top: 1rem;
+            left: 50rem;
+        }
+
+        input:checked + .slider:before{
+            transform: translateX(18px);
+        }
+    }
+
+    @media screen and (min-width: 1201px) and (max-width: 1430px) {
+       .switch{
+            width: 40px;
+            height: 20px;
+            top: 1rem;
+            left: 68rem;
+        }
+
+        input:checked + .slider:before{
+            transform: translateX(18px);
+        }
+    }
+
+    @media screen and (min-width: 1440px) {
+       .switch{
+            width: 40px;
+            height: 20px;
+            top: 1rem;
+            left: 75rem;
+        }
+
+        input:checked + .slider:before{
+            transform: translateX(18px);
+        }
+    }
+
     .switch input {
         width: 0;
         height: 0;
@@ -62,9 +149,7 @@
         transition: 0.4s;
     }
 
-    input:checked + .slider:before{
-        transform: translateX(18px);
-    }
+   
 
     input:checked + .slider {
         background-color: #7b7b7b;

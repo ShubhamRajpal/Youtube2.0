@@ -1,12 +1,13 @@
-import React from "react";
+import { useContext } from "react";
 import { BiDislike, BiLike } from "react-icons/bi";
-const likeIcon = new URL("../Assets/like-comment.png", import.meta.url).href;
-const dislikeIcon = new URL("../Assets/dislike-comment.png", import.meta.url)
-  .href;
+import { themeContext } from "../contexts/context";
+import { publishedDate } from "../utils/helper";
 
 const Comment = ({ data }) => {
+  const { dark } = useContext(themeContext);
+
   return (
-    <div className="my-7">
+    <div className={`my-7 ${dark ? "text-white" : ""}`}>
       <div className="flex items-start">
         <img
           className="w-10 rounded-full"
@@ -14,7 +15,10 @@ const Comment = ({ data }) => {
           alt="comment-author"
         />
         <div className="flex flex-col mx-2">
-          <p className="font-semibold text-md">{data?.authorDisplayName}</p>
+          <span className="flex gap-2 items-center">
+            <p className="font-semibold text-md">{data?.authorDisplayName}</p>
+            <p className="text-gray-500 text-sm">{publishedDate(data?.publishedAt)}</p>
+          </span>
           <p className="text-sm space-x-2">{data?.textOriginal}</p>
         </div>
       </div>

@@ -1,8 +1,11 @@
+import { useContext } from "react";
 import useRelatedVideos from "../hooks/useRelatedVideos";
 import { publishedDate } from "../utils/helper";
+import { themeContext } from "../contexts/context";
 const RelatedVideoCard = ({ data }) => {
 
-  
+  const {dark} = useContext(themeContext);
+
   return (
     <div className="flex gap-2">
       <img
@@ -10,7 +13,7 @@ const RelatedVideoCard = ({ data }) => {
         className=" h-24 rounded-lg"
       />
       <div className="flex flex-col gap-1">
-        <p className="text-sm font-semibold tracking-wide line-clamp-2 text-black">
+        <p className={`text-sm font-semibold tracking-wide line-clamp-2 ${dark ? "text-white" : "text-black"}`}> 
           {data?.snippet?.title}...
         </p>
         <p className="text-xs text-gray-500 tracking-wide">{data?.snippet?.channelTitle}</p>
