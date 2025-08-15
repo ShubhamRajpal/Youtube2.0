@@ -29,16 +29,55 @@
         z-index: 100;
     }
 
-    @media screen and (min-width: 300px) and (max-width: 430px) {
+    @media screen and (min-width: 305px) and (max-width: 320px) {
        .switch{
-            width: 40px;
+            width: 30px;
             height: 20px;
             top: 1.5rem;
-            left: 20rem;
+            left: 15.3rem;
         }
 
         input:checked + .slider:before{
-            transform: translateX(18px);
+            transform: translateX(9px);
+        }
+    }
+
+    @media screen and (min-width: 321px) and (max-width: 350px) {
+       .switch{
+            width: 30px;
+            height: 20px;
+            top: 1.5rem;
+            left: 16.2rem;
+        }
+
+        input:checked + .slider:before{
+            transform: translateX(9px);
+        }
+    }
+
+    @media screen and (min-width: 351px) and (max-width: 385px) {
+       .switch{
+            width: 30px;
+            height: 20px;
+            top: 1.5rem;
+            left: 17.7rem;
+        }
+
+        input:checked + .slider:before{
+            transform: translateX(9px);
+        }
+    }
+
+    @media screen and (min-width: 386px) and (max-width: 430px) {
+       .switch{
+            width: 30px;
+            height: 20px;
+            top: 1.5rem;
+            left: 19.5rem;
+        }
+
+        input:checked + .slider:before{
+            transform: translateX(9px);
         }
     }
 
@@ -81,25 +120,38 @@
         }
     }
 
-    @media screen and (min-width: 1000px) and (max-width: 1200px) {
+    @media screen and (min-width: 1000px) and (max-width: 1130px) {
        .switch{
-            width: 40px;
+            width: 30px;
             height: 20px;
             top: 1rem;
-            left: 50rem;
+            left: 51rem;
         }
 
         input:checked + .slider:before{
-            transform: translateX(18px);
+            transform: translateX(9px);
         }
     }
 
-    @media screen and (min-width: 1201px) and (max-width: 1430px) {
+    @media screen and (min-width: 1131px) and (max-width: 1200px) {
+       .switch{
+            width: 35px;
+            height: 20px;
+            top: 1rem;
+            left: 59rem;
+        }
+
+        input:checked + .slider:before{
+            transform: translateX(14px);
+        }
+    }
+
+    @media screen and (min-width: 1201px) and (max-width: 1439px) {
        .switch{
             width: 40px;
             height: 20px;
             top: 1rem;
-            left: 68rem;
+            left: 63rem;
         }
 
         input:checked + .slider:before{
@@ -112,7 +164,7 @@
             width: 40px;
             height: 20px;
             top: 1rem;
-            left: 75rem;
+            left: 77rem;
         }
 
         input:checked + .slider:before{

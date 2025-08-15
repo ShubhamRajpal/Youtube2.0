@@ -37,7 +37,7 @@ const WatchVideo = () => {
           </div>
         )}
       </div>
-      <div className="w-[400px] sm:w-2/3">
+      <div className="w-[400px] sm:w-1/3">
         {videoDetails?.snippet?.liveBroadcastContent === "live" && <LiveChat />}
         <RelatedVideos data={videoDetails} />
       </div>

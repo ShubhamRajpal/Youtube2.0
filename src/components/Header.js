@@ -66,14 +66,20 @@ const Header = () => {
 
   const getSearchSuggestions = async () => {
     const response = await fetch(YOUTUBE_SEARCH_API + searchQuery);
-    const json = await response.json();
+    const json = await response.text();
+    const arr = JSON.parse(json.substring(json.indexOf("[")));
+    let suggestionsList = [];
+    if(Array.isArray(arr) && Array.isArray(arr.at(1))){
+       suggestionsList = arr.at(1);
+    }
 
-    setSuggestions(json[1]);
+    const suggestionArr = suggestionsList.flatMap((suggestion) => suggestion).filter((suggestion) => typeof suggestion === "string");
+    setSuggestions(suggestionArr);
 
     //update cache
     dispatch(
       cacheResults({
-        [searchQuery]: json[1],
+        [searchQuery]: suggestionArr,
       })
     );
   };
@@ -144,7 +150,7 @@ const Header = () => {
                 : "bg-white shadow-lg border border-gray-100"
             }`}>
             <ul>
-              {suggestions.map((s) => (
+              {suggestions && suggestions.map((s) => (
                 <li
                   key={s}
                   onMouseDown={() => handleSuggestionClick(s)}

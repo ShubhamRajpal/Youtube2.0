@@ -3,7 +3,7 @@ export const YOUTUBE_VIDEOS_API = `https://youtube.googleapis.com/youtube/v3/vid
 export const VIDEO_DETAILS_API = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2Cstatistics&key=${process.env.REACT_APP_YOUTUBEAPI_KEY}&id=`;
 
 export const YOUTUBE_SEARCH_API =
-  "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
+  "https://suggestqueries-clients6.youtube.com/complete/search?client=youtube-reduced&hl=en&gs_ri=youtube-reduced&ds=yt&cp=3&xhr=t&xssi=t&gl=us&gs_id=100&q=";
 
 export const YOUTUBE_KEYWORD_SEARCH =
   "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&q=";
