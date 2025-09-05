@@ -10,6 +10,7 @@ import useChannelDetails from "../hooks/useChannelDetails";
 import RelatedVideos from "./RelatedVideos";
 import { LiaCommentsSolid } from "react-icons/lia";
 
+
 const WatchVideo = () => {
   const dispatch = useDispatch();
   const [searchparams] = useSearchParams();
@@ -18,9 +19,11 @@ const WatchVideo = () => {
   const channelId = videoDetails?.snippet?.channelId;
   const channelDetails = useChannelDetails(channelId);
   console.log(videoDetails);
+  
 
   useEffect(() => {
     dispatch(closeMenu());
+
   }, []);
 
   return (
@@ -30,14 +33,14 @@ const WatchVideo = () => {
         {videoDetails?.snippet?.liveBroadcastContent === "none" ? (
           <CommentsContainer videoId={searchparams.get("v")} />
         ) : (
-          <div className="flex bg-gray-100 gap-2 my-4 py-4 px-2 items-center rounded-lg">
+          <div className="flex bg-gray-100 gap-2 my-4 py-4 px-2 items-center rounded-lg ml-2">
             <LiaCommentsSolid />
             Join the conversation to interact with the creator and others
             watching this live stream.
           </div>
         )}
       </div>
-      <div className="w-[400px] sm:w-1/3">
+      <div className="w-screen lg:w-1/3">
         {videoDetails?.snippet?.liveBroadcastContent === "live" && <LiveChat />}
         <RelatedVideos data={videoDetails} />
       </div>

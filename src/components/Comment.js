@@ -1,10 +1,9 @@
-import { useContext } from "react";
 import { BiDislike, BiLike } from "react-icons/bi";
-import { themeContext } from "../contexts/context";
+import { ModeState } from "../contexts/context";
 import { publishedDate } from "../utils/helper";
 
 const Comment = ({ data }) => {
-  const { dark } = useContext(themeContext);
+  const { darkMode:dark } = ModeState();
 
   return (
     <div className={`my-7 ${dark ? "text-white" : ""}`}>

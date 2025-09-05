@@ -4,12 +4,12 @@ import { HiDownload } from "react-icons/hi";
 import { PiShareFatLight } from "react-icons/pi";
 import { useSearchParams } from "react-router-dom";
 import { formatViewCount, publishedDate } from "../utils/helper";
-import { themeContext } from "../contexts/context";
+import { ModeState } from "../contexts/context";
 
 const Video = ({ data, channelInfo }) => {
   const [searchparams] = useSearchParams();
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
-  const { dark } = useContext(themeContext);
+  const { darkMode: dark } = ModeState();
 
   const handleDesriptionButton = () => {
     setIsDescriptionOpen(!isDescriptionOpen);
@@ -33,11 +33,14 @@ const Video = ({ data, channelInfo }) => {
       {/* Channel Details */}
       <div className="my-3 pl-1 md:pl-2">
         <span>
-          <h1 className={`text-xl line font-bold px-2 sm:px-1 ${dark ? "text-white" : ""}`}>
+          <h1
+            className={`text-xl line font-bold px-2 sm:px-1 ${
+              dark ? "text-white" : ""
+            }`}>
             {data?.snippet?.title}
           </h1>
         </span>
-        <div className="flex flex-col sm:flex-row gap-3 sm:items-center my-2">
+        <div className="flex flex-col xl:flex-row items-start gap-3 xl:items-center my-2">
           <div className="flex gap-2 items-center">
             <img
               className="h-10 rounded-full"
@@ -59,7 +62,7 @@ const Video = ({ data, channelInfo }) => {
               Subscribe
             </button>
           </div>
-          <div className="flex gap-2 w-[60%] sm:justify-end">
+          <div className="flex gap-2 w-screen sm:w-[60%] xl:justify-end">
             <div
               className={`flex items-start gap-4 ${
                 dark
@@ -94,7 +97,7 @@ const Video = ({ data, channelInfo }) => {
       </div>
       {/* Video Description */}
       <div
-        className={`rounded-lg py-2 px-4 flex flex-col gap-2 ml-2 ${
+        className={`rounded-lg py-2 px-4 flex flex-col gap-2 mx-2 w-[92%] ${
           dark ? "bg-[#ffffff1a] text-white font-semibold" : "bg-gray-100"
         }`}>
         <div className="flex gap-2">

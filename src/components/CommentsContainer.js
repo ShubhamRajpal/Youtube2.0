@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import CommentList from "./CommentList";
 import { COMMENTSTHREADS_API } from "../utils/constants";
 import CommentsShimmer from "./CommentsShimmer";
-import { themeContext } from "../contexts/context";
+import { ModeState } from "../contexts/context";
 
 const CommentsContainer = ({ videoId }) => {
   const [commentsList, setCommentsList] = useState([]);
-  const {dark} = useContext(themeContext);
+  const {darkMode:dark} = ModeState();
 
   useEffect(() => {
     getComments();
@@ -16,7 +16,7 @@ const CommentsContainer = ({ videoId }) => {
     const data = await fetch(COMMENTSTHREADS_API + "&videoId=" + videoId);
     const response = await data.json();
     console.log(response);
-    setCommentsList(response.items);
+    setCommentsList(response?.items || []);
   };
 
   return commentsList?.length === 0 ? (

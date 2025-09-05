@@ -5,8 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import WatchVideo from "./components/WatchVideo";
 import MainContainer from "./components/MainContainer";
 import SearchResults from "./components/SearchResults";
-import { useState } from "react";
-import { themeContext } from "./contexts/context.js";
+import ThemeProvider from "./contexts/context";
 
 const appRouter = createBrowserRouter([
   {
@@ -30,26 +29,18 @@ const appRouter = createBrowserRouter([
 ]);
 
 const App = () => {
-  const [darkMode, setDarkMode] = useState(false);
-
-  const toggleModeHandler = () => {
-    setDarkMode(!darkMode);
-  };
+  // const { darkMode } = ModeState();
 
   return (
-    <themeContext.Provider value={{ dark : darkMode }}>
+    <ThemeProvider>
       <Provider store={appStore}>
-        <div className={`${darkMode && "bg-[#0F0F0F]]"} absolute`}>
-          <label className="switch fixed">
-            <input type="checkbox" onChange={toggleModeHandler} />
-            <span className="slider round"></span>
-          </label>
-          <RouterProvider router={appRouter}>
-            <Body />
-          </RouterProvider>
-        </div>
+        {/* <div className={`${darkMode && "bg-[#0F0F0F]]"}`}> */}
+        <RouterProvider router={appRouter}>
+          <Body />
+        </RouterProvider>
+        {/* </div> */}
       </Provider>
-    </themeContext.Provider>
+    </ThemeProvider>
   );
 };
 

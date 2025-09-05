@@ -9,7 +9,7 @@ const RelatedVideos = ({ data }) => {
   console.log(relatedVideos);
 
   return (
-    <div className="flex flex-col gap-2 lg:pl-0 pl-2">
+    <div className="flex flex-col gap-2 lg:pl-0 pl-2 w-[100%]">
       {relatedVideos?.map((video, index) => (
         <Link key={video?.etag} to={"/watch?v=" + video.id.videoId}>
           <RelatedVideoCard data={video} />

@@ -8,8 +8,8 @@ const MainContainer = () => {
 
   return (
     <div
-      className={`flex flex-col ${
-        isMenuOpen ? "md:pl-[200px] lg:pl-[242px]" : "items-start sm:pl-4"
+      className={`flex flex-col no-scrollbar w-screen ${
+        isMenuOpen ? "md:pl-[200px] lg:pl-[240px]" : "items-start sm:pl-4"
       }`}>
       <ButtonList />
       <VideoContainer />

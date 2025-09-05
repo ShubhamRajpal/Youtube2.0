@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import ChatMessage from "./ChatMessage";
 import { useDispatch, useSelector } from "react-redux";
 import { addMessage } from "../utils/chatSlice";
-import { generateRandomMessage, generateRandomNames } from "../utils/helper";
+import { generateRandomImg, generateRandomMessage, generateRandomNames } from "../utils/helper";
 
 const LiveChat = () => {
   const dispatch = useDispatch();
   const message = useSelector((store) => store.chat.messages);
   const [liveMessage, setLiveMessage] = useState("");
-
+  const self = new URL("../Assets/self.jpg", import.meta.url).href;
   useEffect(() => {
     const i = setInterval(() => {
       //API Polling
@@ -16,6 +16,7 @@ const LiveChat = () => {
         addMessage({
           name: generateRandomNames(),
           text: generateRandomMessage(20),
+          image: generateRandomImg(),
         })
       );
     }, 1500);
@@ -25,9 +26,9 @@ const LiveChat = () => {
 
   return (
     <div className="flex flex-col items-center mb-2">
-      <div className="p-2 mx-2 w-full h-[460px] border border-gray-200 overflow-y-scroll flex flex-col-reverse">
+      <div className="p-2 mx-2 w-full h-[460px] border border-gray-200 rounded-lg overflow-y-scroll flex flex-col-reverse">
         {message.map((msg, index) => (
-          <ChatMessage key={index} name={msg.name} text={msg.text} />
+          <ChatMessage key={index} name={msg.name} text={msg.text} image={msg.image}/>
         ))}
       </div>
       <form
@@ -35,8 +36,9 @@ const LiveChat = () => {
           e.preventDefault();
           dispatch(
             addMessage({
-              name: "Shubham",
+              name: "Shubham Rajpal",
               text: liveMessage,
+              image: self
             })
           );
 
@@ -44,7 +46,7 @@ const LiveChat = () => {
         }}>
         <input
           type="text"
-          className="border border-gray-400 w-[310px] p-1 rounded-sm"
+          className="border border-gray-400 w-[370px] p-1 rounded-sm"
           placeholder="Enter Message"
           value={liveMessage}
           onChange={(e) => setLiveMessage(e.target.value)}

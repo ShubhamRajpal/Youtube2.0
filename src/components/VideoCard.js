@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import { formatViewCount, publishedDate } from "../utils/helper";
-import { useContext } from "react";
-import { themeContext } from "../contexts/context";
+import { ModeState } from "../contexts/context";
 import useChannelDetails from "../hooks/useChannelDetails";
 
 const VideoCard = ({ info }) => {
@@ -9,12 +8,12 @@ const VideoCard = ({ info }) => {
   const { thumbnails, channelTitle, title, publishedAt, channelId } = snippet;
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
   const channelInfo = useChannelDetails(channelId);
-  const { dark } = useContext(themeContext);
+  const { darkMode:dark } = ModeState();
   const viewCount = statistics && formatViewCount(statistics.viewCount);
   const timeElapsed = publishedDate(publishedAt);
 
   return (
-    <div className={`mt-2 w-screen ${isMenuOpen ? "md:w-[365]" : "md:w-[400] md:pr-4"} `}>
+    <div className={`mt-2 w-screen ${isMenuOpen ? "md:w-[270] lg:w-[370] xl:w-[360]" : "md:w-[370] md:pr-2 lg:w-[330] xl:w-[325]"} `}>
       <img
         className="md:rounded-2xl w-full object-cover shadow-lg"
         src={thumbnails?.medium?.url}

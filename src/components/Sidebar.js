@@ -1,12 +1,11 @@
-import { useContext } from "react";
 import { useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 const youtubePremiumIcon = new URL("../Assets/yt.png", import.meta.url).href;
 const youtubeStudioIcon = new URL("../Assets/ythex.png", import.meta.url).href;
 const youtubeKidsIcon = new URL("../Assets/ytkids.png", import.meta.url).href;
 const youtubeMusicIcon = new URL("../Assets/ytround.png", import.meta.url).href;
 import { explore } from "../utils/helper";
-import { themeContext } from "../contexts/context";
+import { ModeState } from "../contexts/context";
 import {
   MdOndemandVideo,
   MdOutlineFeedback,
@@ -22,13 +21,14 @@ import { LuHistory } from "react-icons/lu";
 import { IoMdHelpCircleOutline } from "react-icons/io";
 
 const Sidebar = () => {
-  const { dark } = useContext(themeContext);
+  const { darkMode: dark } = ModeState();
+
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
   if (!isMenuOpen) return null;
 
   return (
     <div
-      className={`flex flex-col side-bar fixed overscroll-none z-30 gap-4 pl-5 col-span-4 h-[calc(100vh-80px)] sm:fixed sm:h-[calc(100vh-50px)] overflow-auto min-w-52 ${
+      className={`flex flex-col side-bar fixed overscroll-none z-30 gap-4 md:pl-2 lg:pl-5 col-span-4 h-[calc(100vh-64px)] sm:fixed sm:h-[calc(100vh-50px)] overflow-y-scroll overflow-x-hidden w-46 md:w-48 lg:w-52 ${
         dark ? "bg-[#0F0F0F]" : "bg-white"
       }`}>
       <ul className="flex flex-col w-full gap-2 sm:pt-4">
@@ -104,7 +104,7 @@ const Sidebar = () => {
         {explore.map((explore, index) => (
           <Link to={explore.url} key={explore.title}>
             <li
-              className={`flex gap-4 items-center  rounded-lg py-1 px-2 ${
+              className={`flex gap-4 items-center  rounded-lg py-1 px-2 whitespace-nowrap ${
                 dark ? "text-white hover:bg-[#ffffff1a]" : "hover:bg-gray-100"
               }`}>
               {explore.icon}
@@ -120,7 +120,7 @@ const Sidebar = () => {
       <h1 className={`font-bold ${dark && "text-white"}`}>More from Youtube</h1>
       <ul className="flex flex-col w-full gap-2">
         <li
-          className={`flex gap-4 items-center  rounded-lg py-1 px-2 ${
+          className={`flex gap-4 items-center  rounded-lg py-1 px-2 whitespace-nowrap ${
             dark ? "text-white hover:bg-[#ffffff1a]" : "hover:bg-gray-100"
           }`}>
           <img alt="home" src={youtubePremiumIcon} className="h-5" />
